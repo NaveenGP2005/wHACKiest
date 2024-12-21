@@ -1,6 +1,7 @@
 import 'dart:html' as html;
 import 'package:flutter/material.dart';
 import 'package:whackiest/login.dart';
+import 'package:whackiest/next.dart';
 
 class Home extends StatefulWidget {
   final String name;
@@ -14,6 +15,11 @@ class Home extends StatefulWidget {
 
 class _HomeState extends State<Home> {
   ThemeMode _themeMode = ThemeMode.light;
+
+  // Declare controllers here
+  final TextEditingController nameController = TextEditingController();
+  final TextEditingController priceController = TextEditingController();
+  final TextEditingController imageController = TextEditingController();
 
   @override
   void initState() {
@@ -47,21 +53,48 @@ class _HomeState extends State<Home> {
         drawer: Drawer(
           child: Column(
             children: [
+              // DrawerHeader with more polished UI
               DrawerHeader(
                 decoration: BoxDecoration(
                   color: const Color.fromRGBO(255, 229, 180, 1),
+                  borderRadius: BorderRadius.only(
+                    bottomLeft: Radius.circular(20),
+                    bottomRight: Radius.circular(20),
+                  ),
                 ),
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
+                  crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text(
-                      "SWAP SAMBANDHA",
-                      style: TextStyle(fontSize: 22, fontFamily: 'hi'),
+                    // Profile Picture
+                    CircleAvatar(
+                      radius: 20,
+                      backgroundColor: Colors.grey[200],
+                      child: Icon(
+                        Icons.person,
+                        size: 20,
+                        color: Colors.grey[600],
+                      ),
                     ),
-                    SizedBox(height: 20),
-                    Icon(Icons.person_2_rounded, size: 30),
-                    Text(widget.name),
-                    Text(widget.email),
+                    SizedBox(height: 15),
+                    // User Name
+                    Text(
+                      widget.name,
+                      style: TextStyle(
+                        fontSize: 22,
+                        fontWeight: FontWeight.bold,
+                        color: Colors.black87,
+                      ),
+                    ),
+                    SizedBox(height: 5),
+                    // User Email
+                    Text(
+                      widget.email,
+                      style: TextStyle(
+                        fontSize: 16,
+                        color: Colors.black54,
+                      ),
+                    ),
                   ],
                 ),
               ),
@@ -75,13 +108,27 @@ class _HomeState extends State<Home> {
                     ),
                     ListTile(
                       leading: Icon(Icons.menu_book),
-                      title: Text("Personal Information"),
-                      onTap: () {},
+                      title: Text("Rewards"),
+                      onTap: () {
+                        // Navigate to the Rewards screen
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => RewardsScreen()),
+                        );
+                      },
                     ),
                     ListTile(
                       leading: Icon(Icons.contact_page),
                       title: Text("About Us"),
-                      onTap: () {},
+                      onTap: () {
+                        // Navigate to the About Us screen
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => AboutUsScreen()),
+                        );
+                      },
                     ),
                     SwitchListTile(
                       title: Text("Dark Mode"),
@@ -145,7 +192,7 @@ class _HomeState extends State<Home> {
                           ...[
                             'Are You A Buyer?',
                             'Are You A Seller?',
-                            'Achievements',
+                            'Achievements'
                           ].map((text) {
                             return Column(
                               children: [
@@ -174,7 +221,19 @@ class _HomeState extends State<Home> {
                                       SizedBox(height: 20),
                                       ElevatedButton(
                                         onPressed: () {
-                                          print("$text Button Clicked");
+                                          // Redirect to MyAppHome with the controllers
+                                          Navigator.push(
+                                            context,
+                                            MaterialPageRoute(
+                                              builder: (context) => MyAppHome(
+                                                nameController: nameController,
+                                                priceController:
+                                                    priceController,
+                                                imageController:
+                                                    imageController,
+                                              ),
+                                            ),
+                                          );
                                         },
                                         child: Text("Learn More"),
                                         style: ElevatedButton.styleFrom(
@@ -182,9 +241,7 @@ class _HomeState extends State<Home> {
                                           backgroundColor: const Color.fromARGB(
                                               255, 236, 244, 4),
                                           padding: EdgeInsets.symmetric(
-                                            vertical: 10.0,
-                                            horizontal: 20.0,
-                                          ),
+                                              vertical: 10.0, horizontal: 20.0),
                                         ),
                                       ),
                                     ],
@@ -198,12 +255,12 @@ class _HomeState extends State<Home> {
                     : SingleChildScrollView(
                         scrollDirection: Axis.horizontal,
                         child: Row(
-                          mainAxisSize: MainAxisSize.min, // Ensure no overflow
+                          mainAxisSize: MainAxisSize.min,
                           children: [
                             ...[
                               'Are You A Buyer?',
                               'Are You A Seller?',
-                              'Achievements',
+                              'Achievements'
                             ].map((text) {
                               return Container(
                                 width: screenWidth * 0.3,
@@ -230,7 +287,17 @@ class _HomeState extends State<Home> {
                                     SizedBox(height: 20),
                                     ElevatedButton(
                                       onPressed: () {
-                                        print("$text Button Clicked");
+                                        // Redirect to MyAppHome with the controllers
+                                        Navigator.push(
+                                          context,
+                                          MaterialPageRoute(
+                                            builder: (context) => MyAppHome(
+                                              nameController: nameController,
+                                              priceController: priceController,
+                                              imageController: imageController,
+                                            ),
+                                          ),
+                                        );
                                       },
                                       child: Text("Learn More"),
                                       style: ElevatedButton.styleFrom(
@@ -238,9 +305,7 @@ class _HomeState extends State<Home> {
                                         backgroundColor: const Color.fromARGB(
                                             255, 236, 244, 4),
                                         padding: EdgeInsets.symmetric(
-                                          vertical: 10.0,
-                                          horizontal: 20.0,
-                                        ),
+                                            vertical: 10.0, horizontal: 20.0),
                                       ),
                                     ),
                                   ],
@@ -253,6 +318,248 @@ class _HomeState extends State<Home> {
               ),
             );
           },
+        ),
+      ),
+    );
+  }
+}
+
+class RewardsScreen extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: Text("Rewards"),
+        centerTitle: true,
+        backgroundColor: Colors.deepOrange, // Custom color for the app bar
+      ),
+      body: Padding(
+        padding: const EdgeInsets.all(20.0),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            // Title Section
+            Text(
+              "Your Available Rewards",
+              style: TextStyle(
+                fontSize: 28,
+                fontWeight: FontWeight.bold,
+                color: Colors.black87,
+              ),
+            ),
+            SizedBox(height: 20),
+
+            // Rewards List Section
+            Expanded(
+              child: ListView(
+                children: [
+                  RewardCard(
+                    rewardTitle: "Reward 1: 100 Points",
+                    description: "Unlock special discounts and offers.",
+                  ),
+                  RewardCard(
+                    rewardTitle: "Reward 2: 200 Points",
+                    description: "Redeem for exclusive items in the shop.",
+                  ),
+                  RewardCard(
+                    rewardTitle: "Reward 3: 500 Points",
+                    description: "Get access to premium content.",
+                  ),
+                ],
+              ),
+            ),
+
+            SizedBox(height: 20),
+
+            // Redeem Button Section
+            Center(
+              child: ElevatedButton(
+                onPressed: () {
+                  // Handle reward redemption logic
+                },
+                child: Text("Redeem Reward"),
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: Colors.deepOrange,
+                  padding: EdgeInsets.symmetric(horizontal: 50, vertical: 12),
+                  textStyle:
+                      TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(10),
+                  ),
+                ),
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}
+
+// Custom Card Widget for Rewards
+class RewardCard extends StatelessWidget {
+  final String rewardTitle;
+  final String description;
+
+  const RewardCard({
+    required this.rewardTitle,
+    required this.description,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Card(
+      elevation: 5,
+      margin: EdgeInsets.symmetric(vertical: 10),
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(15),
+      ),
+      child: Padding(
+        padding: const EdgeInsets.all(15.0),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text(
+              rewardTitle,
+              style: TextStyle(
+                fontSize: 20,
+                fontWeight: FontWeight.bold,
+                color: Colors.deepOrange,
+              ),
+            ),
+            SizedBox(height: 8),
+            Text(
+              description,
+              style: TextStyle(
+                fontSize: 16,
+                color: Colors.black54,
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}
+
+class AboutUsScreen extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(title: Text("About Us")),
+      body: SingleChildScrollView(
+        // Allow scrolling if content overflows
+        padding: const EdgeInsets.all(20.0),
+        child: Column(
+          children: [
+            Text("About SWAP SAMBANDA",
+                style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold)),
+            SizedBox(height: 20),
+            Text(
+              "SWAP SAMBANDA is a platform for swapping items and connecting buyers and sellers. Our mission is to provide a seamless trading experience with a focus on trust, security, and convenience.",
+              style: TextStyle(fontSize: 18),
+              textAlign: TextAlign.center,
+            ),
+            SizedBox(height: 20),
+            Text(
+              "Meet Our Team:",
+              style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold),
+            ),
+            SizedBox(height: 20),
+            // Team Member 1
+            Card(
+              elevation: 4,
+              margin: EdgeInsets.symmetric(vertical: 10),
+              child: Padding(
+                padding: const EdgeInsets.all(15.0),
+                child: Row(
+                  children: [
+                    CircleAvatar(
+                      radius: 30,
+                      backgroundColor: Colors.blueAccent,
+                      child: Icon(Icons.person, size: 40, color: Colors.white),
+                    ),
+                    SizedBox(width: 20),
+                    Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text("Naveen G P",
+                            style: TextStyle(
+                                fontSize: 18, fontWeight: FontWeight.bold)),
+                        Text("Lead Developer",
+                            style: TextStyle(fontSize: 16, color: Colors.grey)),
+                        SizedBox(height: 5)
+                      ],
+                    ),
+                  ],
+                ),
+              ),
+            ),
+            // Team Member 2
+            Card(
+              elevation: 4,
+              margin: EdgeInsets.symmetric(vertical: 10),
+              child: Padding(
+                padding: const EdgeInsets.all(15.0),
+                child: Row(
+                  children: [
+                    CircleAvatar(
+                      radius: 30,
+                      backgroundColor: Colors.greenAccent,
+                      child: Icon(Icons.person, size: 40, color: Colors.white),
+                    ),
+                    SizedBox(width: 20),
+                    Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text("M P Pavan",
+                            style: TextStyle(
+                                fontSize: 18, fontWeight: FontWeight.bold)),
+                        Text("Designer & Sub-Developer",
+                            style: TextStyle(fontSize: 16, color: Colors.grey)),
+                        SizedBox(height: 5)
+                      ],
+                    ),
+                  ],
+                ),
+              ),
+            ),
+            // Team Member 3
+            Card(
+              elevation: 4,
+              margin: EdgeInsets.symmetric(vertical: 10),
+              child: Padding(
+                padding: const EdgeInsets.all(15.0),
+                child: Row(
+                  children: [
+                    CircleAvatar(
+                      radius: 30,
+                      backgroundColor: Colors.pinkAccent,
+                      child: Icon(Icons.person, size: 40, color: Colors.white),
+                    ),
+                    SizedBox(width: 20),
+                    Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text("Rajan S Shetti",
+                            style: TextStyle(
+                                fontSize: 18, fontWeight: FontWeight.bold)),
+                        Text("Marketing Director & Designer",
+                            style: TextStyle(fontSize: 16, color: Colors.grey)),
+                        SizedBox(height: 5)
+                      ],
+                    ),
+                  ],
+                ),
+              ),
+            ),
+            SizedBox(height: 20),
+            Text(
+              "Contact Us: randomemail@gmail.com",
+              style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold),
+            ),
+            SizedBox(height: 20),
+          ],
         ),
       ),
     );

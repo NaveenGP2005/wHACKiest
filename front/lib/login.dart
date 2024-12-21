@@ -1,3 +1,4 @@
+
 import 'package:flutter/material.dart';
 import 'package:whackiest/home.dart'; // Ensure correct path to home.dart
 
@@ -130,5 +131,3 @@ class _LoginState extends State<Login> {
     );
   }
 }
-
-
