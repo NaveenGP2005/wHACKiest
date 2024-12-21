@@ -28,7 +28,7 @@ class _HomeState extends State<Home> {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Text(
-                    "My Residency",
+                    "SWAP SAMBANDHA",
                     style: TextStyle(fontSize: 22, fontFamily: 'hi'),
                   ),
                   SizedBox(height: 20),
