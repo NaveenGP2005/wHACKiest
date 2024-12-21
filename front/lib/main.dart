@@ -1,7 +1,6 @@
 import 'dart:html' as html;
 import 'package:flutter/material.dart';
 import 'package:whackiest/splash.dart';
-import 'package:whackiest/home.dart';
 
 void main() {
   runApp(MyApp());

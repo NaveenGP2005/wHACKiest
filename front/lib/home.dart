@@ -1,7 +1,9 @@
 import 'dart:html' as html;
+import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:whackiest/login.dart';
 import 'package:whackiest/next.dart';
+import 'package:whackiest/weather.dart';
 
 class Home extends StatefulWidget {
   final String name;
@@ -15,16 +17,42 @@ class Home extends StatefulWidget {
 
 class _HomeState extends State<Home> {
   ThemeMode _themeMode = ThemeMode.light;
+  String _cityName = "London";
+  String _temperature = "";
+  String _weatherDescription = "";
 
   // Declare controllers here
   final TextEditingController nameController = TextEditingController();
   final TextEditingController priceController = TextEditingController();
   final TextEditingController imageController = TextEditingController();
 
+  get http => null;
+
   @override
   void initState() {
     super.initState();
     _loadThemePreference();
+    _fetchWeather();
+  }
+
+  Future<void> _fetchWeather() async {
+    const String apiKey =
+        "b2d464b352204492910211205242112"; // Replace with your API key
+    final String apiUrl =
+        "http://api.weatherapi.com/v1/current.json?key=$apiKey&q=$_cityName";
+
+    try {
+      final response = await http.get(Uri.parse(apiUrl));
+      if (response.statusCode == 200) {
+        final data = json.decode(response.body);
+        setState(() {
+          _temperature = "${data['current']['temp_c']}°C";
+          _weatherDescription = data['current']['condition']['text'];
+        });
+      }
+    } catch (e) {
+      print("Error fetching weather: $e");
+    }
   }
 
   void _loadThemePreference() {
@@ -130,6 +158,17 @@ class _HomeState extends State<Home> {
                         );
                       },
                     ),
+                    ListTile(
+                      leading: Icon(Icons.contact_page),
+                      title: Text("Weather"),
+                      onTap: () {
+                        // Navigate to the About Us screen
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(builder: (context) => WeatherApp()),
+                        );
+                      },
+                    ),
                     SwitchListTile(
                       title: Text("Dark Mode"),
                       value: _themeMode == ThemeMode.dark,
@@ -192,7 +231,6 @@ class _HomeState extends State<Home> {
                           ...[
                             'Are You A Buyer?',
                             'Are You A Seller?',
-                            'Achievements'
                           ].map((text) {
                             return Column(
                               children: [
@@ -260,7 +298,6 @@ class _HomeState extends State<Home> {
                             ...[
                               'Are You A Buyer?',
                               'Are You A Seller?',
-                              'Achievements'
                             ].map((text) {
                               return Container(
                                 width: screenWidth * 0.3,
@@ -565,3 +602,5 @@ class AboutUsScreen extends StatelessWidget {
     );
   }
 }
+
+// Other classes (RewardsScreen, RewardCard, AboutUsScreen) remain unchanged.
