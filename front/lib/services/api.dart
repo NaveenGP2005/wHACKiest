@@ -5,7 +5,7 @@ import 'package:whackiest/model/product.dart';
 import 'package:http/http.dart' as http;
 
 class Api {
-  static const baseUrl = "http://10.200.76.53:8080/api/";
+  static const baseUrl = "http://10.200.76.28:8080/api/";
 
   static addProduct(Map data) async {
     print("Sending data: $data");
@@ -46,5 +46,4 @@ class Api {
       debugPrint(e.toString());
     }
   }
-  
 }

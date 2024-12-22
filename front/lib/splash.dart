@@ -1,4 +1,3 @@
-
 import 'dart:async';
 import 'package:whackiest/home.dart';
 import 'package:whackiest/login.dart';
@@ -14,7 +13,7 @@ class _SplashScreenState extends State<SplashScreen> {
   @override
   void initState() {
     super.initState();
-    Timer(Duration(seconds: 0), () {
+    Timer(Duration(seconds: 1), () {
       Navigator.pushReplacement(
           context,
           MaterialPageRoute(
@@ -37,8 +36,8 @@ class _SplashScreenState extends State<SplashScreen> {
                     Text(
                       'Swap Sambhandha',
                       style: TextStyle(
-                          fontFamily: 'hi',
-                          fontSize: 50,
+                          fontFamily: 'head',
+                          fontSize: 30,
                           fontWeight: FontWeight.w700,
                           color: Colors.white),
                     ),
@@ -47,10 +46,10 @@ class _SplashScreenState extends State<SplashScreen> {
                 Text(
                   'Connecting communities,empowering sustainable development',
                   style: TextStyle(
-                      fontFamily: 'hii',
+                      fontFamily: 'bdy',
                       color: Colors.white,
                       fontWeight: FontWeight.bold,
-                      fontSize: 20),
+                      fontSize: 15),
                 ),
               ],
             )));

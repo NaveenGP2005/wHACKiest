@@ -74,6 +74,7 @@ class _HomeState extends State<Home> {
     final double screenWidth = MediaQuery.of(context).size.width;
 
     return MaterialApp(
+      debugShowCheckedModeBanner: false,
       theme: ThemeData.light(),
       darkTheme: ThemeData.dark(),
       themeMode: _themeMode,
@@ -201,7 +202,7 @@ class _HomeState extends State<Home> {
             title: Text(
               "SWAP SAMBANDA",
               style: TextStyle(
-                fontFamily: 'hi',
+                fontFamily: 'head',
                 fontWeight: FontWeight.bold,
               ),
             ),
@@ -228,6 +229,39 @@ class _HomeState extends State<Home> {
                 child: isSmallScreen
                     ? Column(
                         children: [
+                          SizedBox(height: 20),
+                          Container(
+                            padding: EdgeInsets.all(16.0),
+                            decoration: BoxDecoration(
+                              gradient: LinearGradient(
+                                colors: [
+                                  const Color.fromARGB(255, 231, 168, 104),
+                                  const Color.fromARGB(255, 240, 157, 157)
+                                ],
+                                begin: Alignment.topLeft,
+                                end: Alignment.bottomRight,
+                              ),
+                              boxShadow: [
+                                BoxShadow(
+                                  color: Colors.black.withOpacity(0.2),
+                                  blurRadius: 6.0,
+                                  spreadRadius: 2.0,
+                                  offset: Offset(4, 4),
+                                ),
+                              ],
+                            ),
+                            child: Text(
+                              'Festivals Are Coming!Start the Countdown with Us!',
+                              style: TextStyle(
+                                fontSize: 20,
+                                fontWeight: FontWeight.bold,
+                                color: Colors.white,
+                                letterSpacing: 1.2,
+                                height: 1.4,
+                              ),
+                              textAlign: TextAlign.center,
+                            ),
+                          ),
                           ...[
                             'Are You A Buyer?',
                             'Are You A Seller?',
@@ -242,7 +276,7 @@ class _HomeState extends State<Home> {
                                   alignment: Alignment.center,
                                   decoration: BoxDecoration(
                                     color:
-                                        const Color.fromARGB(255, 107, 10, 3),
+                                        const Color.fromARGB(255, 242, 57, 44),
                                     borderRadius: BorderRadius.circular(15.0),
                                   ),
                                   child: Column(
@@ -251,7 +285,8 @@ class _HomeState extends State<Home> {
                                       Text(
                                         text,
                                         style: TextStyle(
-                                          fontFamily: 'hii',
+                                          fontSize: 20,
+                                          fontFamily: 'bdy',
                                           fontWeight: FontWeight.bold,
                                           color: Colors.white,
                                         ),
@@ -366,7 +401,7 @@ class RewardsScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("Rewards"),
+        title: Text("Rewards", style: TextStyle(fontFamily: 'head')),
         centerTitle: true,
         backgroundColor: Colors.deepOrange, // Custom color for the app bar
       ),
@@ -483,18 +518,22 @@ class AboutUsScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text("About Us")),
+      appBar:
+          AppBar(title: Text("About Us", style: TextStyle(fontFamily: 'head'))),
       body: SingleChildScrollView(
         // Allow scrolling if content overflows
         padding: const EdgeInsets.all(20.0),
         child: Column(
           children: [
             Text("About SWAP SAMBANDA",
-                style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold)),
+                style: TextStyle(
+                    fontSize: 24,
+                    fontWeight: FontWeight.bold,
+                    fontFamily: "bdy")),
             SizedBox(height: 20),
             Text(
               "SWAP SAMBANDA is a platform for swapping items and connecting buyers and sellers. Our mission is to provide a seamless trading experience with a focus on trust, security, and convenience.",
-              style: TextStyle(fontSize: 18),
+              style: TextStyle(fontSize: 18, fontFamily: 'bdy'),
               textAlign: TextAlign.center,
             ),
             SizedBox(height: 20),
@@ -522,7 +561,9 @@ class AboutUsScreen extends StatelessWidget {
                       children: [
                         Text("Naveen G P",
                             style: TextStyle(
-                                fontSize: 18, fontWeight: FontWeight.bold)),
+                                fontSize: 18,
+                                fontWeight: FontWeight.bold,
+                                fontFamily: 'bdy')),
                         Text("Lead Developer",
                             style: TextStyle(fontSize: 16, color: Colors.grey)),
                         SizedBox(height: 5)
@@ -551,7 +592,9 @@ class AboutUsScreen extends StatelessWidget {
                       children: [
                         Text("M P Pavan",
                             style: TextStyle(
-                                fontSize: 18, fontWeight: FontWeight.bold)),
+                                fontSize: 18,
+                                fontWeight: FontWeight.bold,
+                                fontFamily: 'bdy')),
                         Text("Designer & Sub-Developer",
                             style: TextStyle(fontSize: 16, color: Colors.grey)),
                         SizedBox(height: 5)
@@ -580,7 +623,9 @@ class AboutUsScreen extends StatelessWidget {
                       children: [
                         Text("Rajan S Shetti",
                             style: TextStyle(
-                                fontSize: 18, fontWeight: FontWeight.bold)),
+                                fontSize: 18,
+                                fontWeight: FontWeight.bold,
+                                fontFamily: 'bdy')),
                         Text("Marketing Director & Designer",
                             style: TextStyle(fontSize: 16, color: Colors.grey)),
                         SizedBox(height: 5)
@@ -593,7 +638,8 @@ class AboutUsScreen extends StatelessWidget {
             SizedBox(height: 20),
             Text(
               "Contact Us: randomemail@gmail.com",
-              style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold),
+              style: TextStyle(
+                  fontSize: 22, fontWeight: FontWeight.bold, fontFamily: 'bdy'),
             ),
             SizedBox(height: 20),
           ],

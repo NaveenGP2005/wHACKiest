@@ -16,6 +16,7 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) => MaterialApp(
+    debugShowCheckedModeBanner: false,
         theme: ThemeData(primarySwatch: Colors.teal),
         home: MyAppHome(
           nameController: nameController,
@@ -39,7 +40,25 @@ class MyAppHome extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) => Scaffold(
-        appBar: AppBar(title: Text('Product List')),
+        appBar: AppBar(
+          title: Text(
+            "Product List",
+            style: TextStyle(
+              fontFamily: 'head',
+              fontWeight: FontWeight.bold,
+            ),
+          ),
+          centerTitle: true,
+          flexibleSpace: Container(
+            decoration: BoxDecoration(
+              gradient: LinearGradient(
+                colors: [Colors.orange, Colors.red],
+                begin: Alignment.topLeft,
+                end: Alignment.bottomRight,
+              ),
+            ),
+          ),
+        ),
         body: FutureBuilder(
           future: Api.getProducts(),
           builder: (BuildContext context, AsyncSnapshot snapshot) {
@@ -51,8 +70,10 @@ class MyAppHome extends StatelessWidget {
                 itemCount: data.length,
                 itemBuilder: (BuildContext context, int index) {
                   return ListTile(
-                    title: Text(data[index].name ?? ''),
-                    subtitle: Text("\$${data[index].price}"),
+                    title: Text(data[index].name ?? '',
+                        style: TextStyle(fontFamily: "bdy")),
+                    subtitle: Text("\$${data[index].price}",
+                        style: TextStyle(fontFamily: "bdy")),
                     leading: Image.network(data[index].image ?? ''),
                     onTap: () {
                       Navigator.push(
@@ -116,7 +137,27 @@ class ProductDetailsPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text(product.name ?? 'Product Details')),
+      appBar: AppBar(
+        title: Text(
+          product.name ?? 'Product Details',
+          style: TextStyle(
+            fontFamily: "head",
+            fontSize: 24,
+            fontWeight: FontWeight.bold,
+          ),
+        ),
+        centerTitle: true,
+        elevation: 0,
+        flexibleSpace: Container(
+          decoration: BoxDecoration(
+            gradient: LinearGradient(
+              colors: [Colors.orange, Colors.red], // Gradient colors
+              begin: Alignment.topLeft,
+              end: Alignment.bottomRight,
+            ),
+          ),
+        ),
+      ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
         child: Column(
@@ -129,12 +170,14 @@ class ProductDetailsPage extends StatelessWidget {
             const SizedBox(height: 20),
             Text(
               product.name ?? 'No Name',
-              style: const TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
+              style: const TextStyle(
+                  fontSize: 24, fontWeight: FontWeight.bold, fontFamily: "bdy"),
             ),
             const SizedBox(height: 10),
             Text(
               "\$${product.price}",
-              style: const TextStyle(fontSize: 20, color: Colors.teal),
+              style: const TextStyle(
+                  fontSize: 20, color: Colors.teal, fontFamily: "bdy"),
             ),
             const SizedBox(height: 20),
             ElevatedButton(
@@ -233,7 +276,27 @@ class AddProductPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) => Scaffold(
-        appBar: AppBar(title: Text('Add Product')),
+        appBar: AppBar(
+          title: Text(
+            "Add Product",
+            style: TextStyle(
+              fontFamily: "head",
+              fontSize: 24,
+              fontWeight: FontWeight.bold,
+            ),
+          ),
+          centerTitle: true,
+          elevation: 0,
+          flexibleSpace: Container(
+            decoration: BoxDecoration(
+              gradient: LinearGradient(
+                colors: [Colors.orange, Colors.red], // Gradient colors
+                begin: Alignment.topLeft,
+                end: Alignment.bottomRight,
+              ),
+            ),
+          ),
+        ),
         body: Padding(
           padding: const EdgeInsets.all(16.0),
           child: Column(

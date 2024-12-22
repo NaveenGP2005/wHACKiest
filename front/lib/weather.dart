@@ -44,47 +44,85 @@ class _WeatherAppState extends State<WeatherApp> {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      debugShowCheckedModeBanner: false,
+      theme: ThemeData(
+        primarySwatch: Colors.blue,
+        visualDensity: VisualDensity.adaptivePlatformDensity,
+      ),
       home: Scaffold(
         appBar: AppBar(
-          title: Text("Weather App"),
+          title: Text(
+            "Weather App",
+            style: TextStyle(fontFamily: 'head', fontWeight: FontWeight.bold),
+          ),
+          centerTitle: true,
+          backgroundColor: Colors.blueAccent,
+          elevation: 5,
         ),
         body: Padding(
           padding: EdgeInsets.all(16.0),
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Text(
-                "Weather in $_cityName",
-                style: TextStyle(fontSize: 24),
-              ),
-              SizedBox(height: 20),
-              _temperature.isEmpty
-                  ? CircularProgressIndicator()
-                  : Column(
-                      children: [
-                        Text(
-                          "Temperature: $_temperature",
-                          style: TextStyle(fontSize: 22),
-                        ),
-                        Text(
-                          "Condition: $_weatherDescription",
-                          style: TextStyle(fontSize: 18),
-                        ),
-                        IconButton(
-                          icon: Icon(Icons.arrow_back), // Back arrow icon
-                          onPressed: () {
-                            Navigator.pop(
-                                context); // Navigate back to the drawer
-                          },
-                        ),
-                      ],
-                    ),
-              SizedBox(height: 20),
-              ElevatedButton(
-                onPressed: fetchWeather,
-                child: Text("Refresh Weather"),
-              ),
-            ],
+          child: Center(
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Text(
+                  "Weather in $_cityName",
+                  style: TextStyle(
+                      fontSize: 28,
+                      fontWeight: FontWeight.bold,
+                      color: Colors.blueAccent,
+                      fontFamily: 'bdy'),
+                ),
+                SizedBox(height: 20),
+                _temperature.isEmpty
+                    ? Center(child: CircularProgressIndicator())
+                    : Column(
+                        children: [
+                          Text(
+                            _temperature,
+                            style: TextStyle(
+                                fontSize: 50,
+                                fontWeight: FontWeight.bold,
+                                color: Colors.blue,
+                                fontFamily: 'bdy'),
+                          ),
+                          SizedBox(height: 10),
+                          Text(
+                            _weatherDescription,
+                            style: TextStyle(
+                                fontSize: 20,
+                                color: Colors.grey.shade700,
+                                fontFamily: 'bdy'),
+                          ),
+                          SizedBox(height: 20),
+                          ElevatedButton(
+                            onPressed: fetchWeather,
+                            style: ElevatedButton.styleFrom(
+                              backgroundColor: Colors.blueAccent,
+                              padding: EdgeInsets.symmetric(
+                                  horizontal: 40, vertical: 15),
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(30),
+                              ),
+                            ),
+                            child: Text(
+                              "Refresh Weather",
+                              style: TextStyle(fontSize: 18),
+                            ),
+                          ),
+                        ],
+                      ),
+                SizedBox(height: 20),
+                IconButton(
+                  icon: Icon(Icons.arrow_back, color: Colors.blueAccent),
+                  onPressed: () {
+                    Navigator.pop(
+                        context); // Navigate back to the previous screen
+                  },
+                  iconSize: 30,
+                ),
+              ],
+            ),
           ),
         ),
       ),
