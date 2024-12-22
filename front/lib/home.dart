@@ -229,31 +229,32 @@ class _HomeState extends State<Home> {
                 child: isSmallScreen
                     ? Column(
                         children: [
-                          SizedBox(height: 20),
+                          const SizedBox(height: 20),
                           Container(
-                            padding: EdgeInsets.all(16.0),
+                            padding: const EdgeInsets.all(16.0),
                             decoration: BoxDecoration(
-                              gradient: LinearGradient(
+                              gradient: const LinearGradient(
                                 colors: [
-                                  const Color.fromARGB(255, 231, 168, 104),
-                                  const Color.fromARGB(255, 240, 157, 157)
+                                  Color.fromARGB(255, 231, 168, 104),
+                                  Color.fromARGB(255, 240, 157, 157)
                                 ],
                                 begin: Alignment.topLeft,
                                 end: Alignment.bottomRight,
                               ),
+                              borderRadius: BorderRadius.circular(10.0),
                               boxShadow: [
                                 BoxShadow(
                                   color: Colors.black.withOpacity(0.2),
                                   blurRadius: 6.0,
                                   spreadRadius: 2.0,
-                                  offset: Offset(4, 4),
+                                  offset: const Offset(4, 4),
                                 ),
                               ],
                             ),
-                            child: Text(
-                              'Festivals Are Coming!Start the Countdown with Us!',
+                            child: const Text(
+                              'Festivals Are Coming! Start the Countdown with Us!',
                               style: TextStyle(
-                                fontSize: 20,
+                                fontSize: 22,
                                 fontWeight: FontWeight.bold,
                                 color: Colors.white,
                                 letterSpacing: 1.2,
@@ -262,128 +263,191 @@ class _HomeState extends State<Home> {
                               textAlign: TextAlign.center,
                             ),
                           ),
-                          ...[
-                            'Are You A Buyer?',
-                            'Are You A Seller?',
-                          ].map((text) {
-                            return Column(
-                              children: [
-                                Container(
-                                  width: screenWidth * 0.9,
-                                  height: 220,
-                                  padding: EdgeInsets.all(20.0),
-                                  margin: EdgeInsets.symmetric(vertical: 10.0),
-                                  alignment: Alignment.center,
-                                  decoration: BoxDecoration(
-                                    color:
-                                        const Color.fromARGB(255, 242, 57, 44),
-                                    borderRadius: BorderRadius.circular(15.0),
+                          ...['Are You A Buyer?', 'Are You A Seller?']
+                              .map((text) {
+                            return Container(
+                              width: screenWidth * 0.9,
+                              height: 220,
+                              padding: const EdgeInsets.all(20.0),
+                              margin:
+                                  const EdgeInsets.symmetric(vertical: 10.0),
+                              decoration: BoxDecoration(
+                                color: const Color.fromARGB(255, 242, 57, 44),
+                                borderRadius: BorderRadius.circular(15.0),
+                                boxShadow: [
+                                  BoxShadow(
+                                    color: Colors.black.withOpacity(0.1),
+                                    blurRadius: 8.0,
+                                    offset: const Offset(2, 2),
                                   ),
-                                  child: Column(
-                                    mainAxisAlignment: MainAxisAlignment.center,
-                                    children: [
-                                      Text(
-                                        text,
-                                        style: TextStyle(
-                                          fontSize: 20,
-                                          fontFamily: 'bdy',
-                                          fontWeight: FontWeight.bold,
-                                          color: Colors.white,
-                                        ),
-                                      ),
-                                      SizedBox(height: 20),
-                                      ElevatedButton(
-                                        onPressed: () {
-                                          // Redirect to MyAppHome with the controllers
-                                          Navigator.push(
-                                            context,
-                                            MaterialPageRoute(
-                                              builder: (context) => MyAppHome(
-                                                nameController: nameController,
-                                                priceController:
-                                                    priceController,
-                                                imageController:
-                                                    imageController,
-                                              ),
-                                            ),
-                                          );
-                                        },
-                                        child: Text("Learn More"),
-                                        style: ElevatedButton.styleFrom(
-                                          foregroundColor: Colors.white,
-                                          backgroundColor: const Color.fromARGB(
-                                              255, 236, 244, 4),
-                                          padding: EdgeInsets.symmetric(
-                                              vertical: 10.0, horizontal: 20.0),
-                                        ),
-                                      ),
-                                    ],
+                                ],
+                              ),
+                              child: Column(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  Text(
+                                    text,
+                                    style: const TextStyle(
+                                      fontSize: 20,
+                                      fontFamily: 'bdy',
+                                      fontWeight: FontWeight.bold,
+                                      color: Colors.white,
+                                    ),
                                   ),
-                                ),
-                              ],
+                                  const SizedBox(height: 20),
+                                  ElevatedButton(
+                                    onPressed: () {
+                                      Navigator.push(
+                                        context,
+                                        MaterialPageRoute(
+                                          builder: (context) => MyAppHome(
+                                            nameController: nameController,
+                                            priceController: priceController,
+                                            imageController: imageController,
+                                          ),
+                                        ),
+                                      );
+                                    },
+                                    style: ElevatedButton.styleFrom(
+                                      foregroundColor: Colors.white,
+                                      backgroundColor: const Color.fromARGB(
+                                          255, 236, 244, 4),
+                                      padding: const EdgeInsets.symmetric(
+                                        vertical: 10.0,
+                                        horizontal: 20.0,
+                                      ),
+                                      shape: RoundedRectangleBorder(
+                                        borderRadius:
+                                            BorderRadius.circular(8.0),
+                                      ),
+                                    ),
+                                    child: const Text("Learn More"),
+                                  ),
+                                ],
+                              ),
                             );
                           }).toList(),
                         ],
                       )
                     : SingleChildScrollView(
                         scrollDirection: Axis.horizontal,
-                        child: Row(
-                          mainAxisSize: MainAxisSize.min,
+                        child: Column(
                           children: [
-                            ...[
-                              'Are You A Buyer?',
-                              'Are You A Seller?',
-                            ].map((text) {
-                              return Container(
-                                width: screenWidth * 0.3,
-                                height: 220,
-                                padding: EdgeInsets.all(20.0),
-                                margin: EdgeInsets.symmetric(
-                                    horizontal: 15.0, vertical: 10.0),
-                                alignment: Alignment.center,
-                                decoration: BoxDecoration(
-                                  color: const Color.fromARGB(255, 107, 10, 3),
-                                  borderRadius: BorderRadius.circular(15.0),
-                                ),
-                                child: Column(
-                                  mainAxisAlignment: MainAxisAlignment.center,
-                                  children: [
-                                    Text(
-                                      text,
-                                      style: TextStyle(
-                                        fontFamily: 'hii',
-                                        fontWeight: FontWeight.bold,
-                                        color: Colors.white,
-                                      ),
+                            SizedBox(width: 20),
+                            Row(
+                              mainAxisSize: MainAxisSize.min,
+                              children: [
+                                Container(
+                                  padding: const EdgeInsets.all(16.0),
+                                  decoration: BoxDecoration(
+                                    gradient: const LinearGradient(
+                                      colors: [
+                                        Color.fromARGB(255, 231, 168, 104),
+                                        Color.fromARGB(255, 240, 157, 157)
+                                      ],
+                                      begin: Alignment.topLeft,
+                                      end: Alignment.bottomRight,
                                     ),
-                                    SizedBox(height: 20),
-                                    ElevatedButton(
-                                      onPressed: () {
-                                        // Redirect to MyAppHome with the controllers
-                                        Navigator.push(
-                                          context,
-                                          MaterialPageRoute(
-                                            builder: (context) => MyAppHome(
-                                              nameController: nameController,
-                                              priceController: priceController,
-                                              imageController: imageController,
+                                    borderRadius: BorderRadius.circular(10.0),
+                                    boxShadow: [
+                                      BoxShadow(
+                                        color: Colors.black.withOpacity(0.2),
+                                        blurRadius: 6.0,
+                                        spreadRadius: 2.0,
+                                        offset: const Offset(4, 4),
+                                      ),
+                                    ],
+                                  ),
+                                  child: const Text(
+                                    'Festivals Are Coming! Start the Countdown with Us!',
+                                    style: TextStyle(
+                                      fontSize: 22,
+                                      fontWeight: FontWeight.bold,
+                                      color: Colors.white,
+                                      letterSpacing: 1.2,
+                                      height: 1.4,
+                                    ),
+                                    textAlign: TextAlign.center,
+                                  ),
+                                ),
+                              ],
+                            ),
+                            Row(
+                              mainAxisSize: MainAxisSize.min,
+                              children: [
+                                ...['Are You A Buyer?', 'Are You A Seller?']
+                                    .map((text) {
+                                  return Container(
+                                    width: screenWidth * 0.3,
+                                    height: 220,
+                                    padding: const EdgeInsets.all(20.0),
+                                    margin: const EdgeInsets.symmetric(
+                                      horizontal: 15.0,
+                                      vertical: 10.0,
+                                    ),
+                                    decoration: BoxDecoration(
+                                      color:
+                                          const Color.fromARGB(255, 107, 10, 3),
+                                      borderRadius: BorderRadius.circular(15.0),
+                                      boxShadow: [
+                                        BoxShadow(
+                                          color: Colors.black.withOpacity(0.1),
+                                          blurRadius: 8.0,
+                                          offset: const Offset(2, 2),
+                                        ),
+                                      ],
+                                    ),
+                                    child: Column(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.center,
+                                      children: [
+                                        Text(
+                                          text,
+                                          style: const TextStyle(
+                                            fontFamily: 'hii',
+                                            fontWeight: FontWeight.bold,
+                                            color: Colors.white,
+                                          ),
+                                        ),
+                                        const SizedBox(height: 20),
+                                        ElevatedButton(
+                                          onPressed: () {
+                                            Navigator.push(
+                                              context,
+                                              MaterialPageRoute(
+                                                builder: (context) => MyAppHome(
+                                                  nameController:
+                                                      nameController,
+                                                  priceController:
+                                                      priceController,
+                                                  imageController:
+                                                      imageController,
+                                                ),
+                                              ),
+                                            );
+                                          },
+                                          style: ElevatedButton.styleFrom(
+                                            foregroundColor: Colors.white,
+                                            backgroundColor:
+                                                const Color.fromARGB(
+                                                    255, 236, 244, 4),
+                                            padding: const EdgeInsets.symmetric(
+                                              vertical: 10.0,
+                                              horizontal: 20.0,
+                                            ),
+                                            shape: RoundedRectangleBorder(
+                                              borderRadius:
+                                                  BorderRadius.circular(8.0),
                                             ),
                                           ),
-                                        );
-                                      },
-                                      child: Text("Learn More"),
-                                      style: ElevatedButton.styleFrom(
-                                        foregroundColor: Colors.white,
-                                        backgroundColor: const Color.fromARGB(
-                                            255, 236, 244, 4),
-                                        padding: EdgeInsets.symmetric(
-                                            vertical: 10.0, horizontal: 20.0),
-                                      ),
+                                          child: const Text("Learn More"),
+                                        ),
+                                      ],
                                     ),
-                                  ],
-                                ),
-                              );
-                            }).toList(),
+                                  );
+                                }).toList(),
+                              ],
+                            ),
                           ],
                         ),
                       ),
